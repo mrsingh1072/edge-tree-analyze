@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://edge-tree-backend.onrender.com",
   timeout: 10_000,
 });
 
