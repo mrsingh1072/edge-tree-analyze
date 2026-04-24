@@ -1,44 +1,39 @@
-# EdgeTree Analyzer (Full Stack)
+# EdgeTree Analyzer
 
-Node/Express backend + React/Vite frontend to analyze directed edge lists, build hierarchies, detect cycles, compute depth, and return SRM-style summary.
+EdgeTree Analyzer is a full‑stack project that accepts directed edges like `A->B`, builds one or more hierarchies, detects cycles, computes depth for valid trees, and returns a clean summary.
 
-## Folder structure
+## Live project
 
-```
-EdgeTree Analyzer/
-  backend/
-  frontend/
-```
+- **Frontend (Vercel)**: `https://edge-tree-analyze.vercel.app`
+- **Backend (Render)**: `https://edge-tree-backend.onrender.com`
+- **API Endpoint**: `https://edge-tree-backend.onrender.com/bfhl`
 
-## Backend (Express) — Port 5000
+## Author
 
-### Setup
+- **Name**: Saurabh Kumar
+- **GitHub**: `https://github.com/mrsingh1072`
+- **LinkedIn**: `https://www.linkedin.com/in/saurabh-singh-959b48323?utm_source=share_via&utm_content=profile&utm_medium=member_android`
 
-```bash
-cd backend
-npm install
-```
+## Features
 
-### Configure identity (required by SRM rule)
+- Input validation for `X->Y` format (single uppercase letters A–Z)
+- Captures invalid entries and duplicate edges
+- Supports multiple independent trees (multiple roots)
+- Multi‑parent handling (first parent kept, later ignored)
+- Cycle detection per connected component
+- Depth calculation for non‑cyclic trees (longest root‑to‑leaf path, node count)
+- Summary with total trees, total cycles, and largest tree root
 
-Edit `backend/.env`:
+## Tech stack
 
-- `USER_ID=yourname_ddmmyyyy`
-- `EMAIL_ID=your_college_email@example.edu`
-- `COLLEGE_ROLL_NUMBER=your_roll_number`
+- **Backend**: Node.js, Express.js, CORS, dotenv
+- **Frontend**: React + Vite, Axios, React Icons
 
-### Run
+## API usage
 
-```bash
-cd backend
-npm run dev
-```
+### `POST /bfhl`
 
-### API
-
-`POST /bfhl`
-
-Request:
+**Request**
 
 ```json
 {
@@ -46,7 +41,7 @@ Request:
 }
 ```
 
-Response (shape):
+**Response shape**
 
 ```json
 {
@@ -56,13 +51,39 @@ Response (shape):
   "hierarchies": [],
   "invalid_entries": [],
   "duplicate_edges": [],
-  "summary": {}
+  "summary": {
+    "total_trees": 0,
+    "total_cycles": 0,
+    "largest_tree_root": null
+  }
 }
 ```
 
-## Frontend (React + Vite)
+## Run locally
 
-### Setup & run
+### Backend (Port 5000)
+
+```bash
+cd backend
+npm install
+```
+
+Create `backend/.env`:
+
+```bash
+PORT=5000
+USER_ID=yourname_ddmmyyyy
+EMAIL_ID=your_college_email@example.edu
+COLLEGE_ROLL_NUMBER=your_roll_number
+```
+
+Start:
+
+```bash
+npm run dev
+```
+
+### Frontend
 
 ```bash
 cd frontend
@@ -70,38 +91,19 @@ npm install
 npm run dev
 ```
 
-Open the Vite URL shown in the terminal (usually `http://localhost:5173`).
-
-The UI calls `http://localhost:5000/bfhl`.
-
 ## Deployment
 
 ### Backend → Render
 
-1. Push this project to GitHub.
-2. On Render, create a **New Web Service** from the repo.
-3. **Root Directory**: `backend`
-4. **Build Command**: `npm install`
-5. **Start Command**: `node server.js`
-6. Add environment variables:
-   - `PORT` (Render sets it automatically; keep code using `process.env.PORT`)
-   - `USER_ID`, `EMAIL_ID`, `COLLEGE_ROLL_NUMBER`
-7. Deploy and copy the backend URL.
+- **Root Directory**: `backend`
+- **Build Command**: `npm install`
+- **Start Command**: `node server.js`
+- **Environment Variables**: `USER_ID`, `EMAIL_ID`, `COLLEGE_ROLL_NUMBER` (Render provides `PORT`)
 
 ### Frontend → Vercel
 
-1. Import the repo in Vercel.
-2. **Root Directory**: `frontend`
-3. **Build Command**: `npm run build`
-4. **Output Directory**: `dist`
-5. Deploy.
+- **Root Directory**: `frontend`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
 
-> If you deploy, update `frontend/src/services/api.js` `baseURL` to your Render backend URL.
-
-## Making it plagiarism-free (practical checklist)
-
-- Change identity fields in `backend/.env` to your real details.
-- Change UI wording (subtitle/help text), colors, spacing, and card layouts in `frontend/src/App.css`.
-- Add 2–3 extra sample datasets and a small “About” section describing your own approach.
-- Record a short demo video and add screenshots to this README.
 
