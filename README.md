@@ -58,12 +58,17 @@ EdgeTree Analyzer is a full‑stack project that accepts directed edges like `A-
   }
 }
 ```
+
+
+
+
 ## Run locally
 
 ### Backend (Port 5000)
 
 ```bash
 cd backend
+
 npm install
 ```
 
